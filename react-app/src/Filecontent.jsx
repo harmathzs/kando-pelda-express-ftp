@@ -8,10 +8,15 @@ export default class Filecontent extends Component {
 
     componentDidMount() {
         if (!this.state.isFileReceived) {
-            this.setState({
-                isFileReceived: true,
-                fileContent: 'TODO'
-            });
+            fetch("http://localhost:3333/ftp-file/almafa")
+            .then(res => res.text())
+            .then(res=>{
+                this.setState({
+                    isFileReceived: true,
+                    fileContent: res
+                });
+            })
+            .catch(console.warn);
         }
     }
 

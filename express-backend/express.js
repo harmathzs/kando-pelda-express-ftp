@@ -1,6 +1,10 @@
 const ftp = require('basic-ftp');
 const express = require('express');
 const app = express();
+// At the top of app.js
+const cors = require("cors");
+app.use(cors());
+
 
 app.use(express.json());
 
