@@ -38,4 +38,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const port = 3333;
+app.listen(port, ()=>{
+  console.log(`Server started on port ${port}`);
+});
+
 module.exports = app;
