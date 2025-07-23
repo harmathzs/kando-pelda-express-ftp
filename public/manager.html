@@ -13,7 +13,10 @@
         fetch('http://localhost:3333/almafa')
         .then(res => res.text())
         .then(res => {
-            document.getElementById('almafa-par').innerText = res;
+            let almafaPar = document.getElementById('almafa-par');
+            if (almafaPar && res) {
+                almafaPar.innerText = res;
+            }
         })
         .catch(console.warn);
     </script>
