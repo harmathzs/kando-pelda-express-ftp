@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1024, initial-scale=1.0">
+    <title>FTP Manager</title>
+</head>
+<body>
+    <p>Hello!</p>
+    <p>GET almafa.txt</p>
+    <p id="almafa-par"></p>
+    <script>
+        fetch('http://localhost:3333/almafa')
+        .then(res => res.text())
+        .then(res => {
+            document.getElementById('almafa-par').innerText = res;
+        })
+        .catch(console.warn);
+    </script>
+</body>
+</html>
