@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Filecontent from './Filecontent';
+import FileUploader from './FileUploader';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,6 +33,7 @@ function App() {
       <div className='card'>
         <Filecontent one="egy" three="3" fun={()=>{}} />
       </div>
+      <FileUploader />
     </>
   )
 }
