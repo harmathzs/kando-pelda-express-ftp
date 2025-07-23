@@ -1,4 +1,5 @@
 const ftp = require('basic-ftp');
+const multer = require('multer');
 const express = require('express');
 const app = express();
 // At the top of app.js
@@ -7,6 +8,8 @@ app.use(cors());
 
 
 app.use(express.json());
+
+const upload = multer({ dest: 'uploads/' }); // temp file storage
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -49,6 +52,32 @@ const client = new ftp.Client();
   } finally {
     client.close();
   }
+});
+
+app.post('/upload', upload.single('file'), async (req, res) => {
+  try {
+        const filePath = req.file.path;
+        const originalName = req.file.originalname;
+
+        console.log("📤 Received:", originalName, "→", filePath);
+
+        const client = new ftp.Client();
+        await client.access({
+            host: "127.0.0.1",
+            user: "user",
+            password: "pass",
+            secure: false,
+        });
+
+        // Upload file to FTP server
+        await client.uploadFrom(filePath, "/" + originalName);
+        client.close();
+
+        res.send("Uploaded to FTP: " + originalName);
+    } catch (err) {
+        console.error("❌ FTP upload failed:", err);
+        res.status(500).send("FTP upload failed");
+    }  
 });
 
 const port = 3333;
